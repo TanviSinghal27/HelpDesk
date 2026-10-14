@@ -1,0 +1,34 @@
+<div style="padding: 20px; font-family: monospace;">
+  <h2>Ticket List</h2>
+  <button [routerLink]="['/create']" style="margin-bottom: 15px; padding: 5px 10px;">+ Add New Ticket</button>
+
+  <table border="1" cellpadding="8" style="border-collapse: collapse; width: 100%;">
+    <thead>
+      <tr style="background-color: #f2f2f2;">
+        <th>ID</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Created Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of tickets">
+        <td>{{ ticket.ticketId }}</td>
+        <td>{{ ticket.title }}</td>
+        <td>
+          <span [style.color]="ticket.status === 'Open' ? 'green' : 'gray'">
+            {{ ticket.status }}
+          </span>
+        </td>
+        <td>{{ ticket.createdDate }}</td>
+        <td>
+          <button [routerLink]="['/edit', ticket.ticketId]" style="margin-right: 5px;">Edit</button>
+          <button [routerLink]="['/details', ticket.ticketId]" [queryParams]="{view: 'true'}"
+            style="margin-right: 5px;">Details</button>
+          <button (click)="deleteTicket(ticket.ticketId)" style="color: red;">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
